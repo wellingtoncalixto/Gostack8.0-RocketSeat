@@ -2,7 +2,7 @@ import File from '../models/File';
 
 class FileController {
   async store(req, res) {
-    const { filename: path, originalname: name } = req.file;
+    const { originalname: name, filename: path } = req.file;
 
     const file = await File.create({
       name,
@@ -12,4 +12,4 @@ class FileController {
     return res.json(file);
   }
 }
-export default FileController;
+export default new FileController();
