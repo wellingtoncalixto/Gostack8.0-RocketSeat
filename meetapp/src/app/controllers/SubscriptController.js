@@ -1,12 +1,32 @@
 /* eslint-disable consistent-return */
+import { Op } from 'sequelize';
 import Subscript from '../models/Subscript';
 import Meetup from '../models/Meetup';
 import User from '../models/User';
 
 class SubscriptController {
+  async index(req, res) {
+    const subscriptions = await Subscript.findAll({
+      where: { user_id: req.userId },
+      include: [
+        {
+          model: Meetup,
+          where: {
+            date: {
+              [Op.gt]: new Date(),
+            },
+          },
+          required: true,
+        },
+      ],
+      order: [[Meetup, 'date']],
+    });
+
+    return res.json(subscriptions);
+  }
+
   async store(req, res) {
     const user = await User.findByPk(req.userId);
-    const subscripts = await Subscript.findAll({ where: { user_id: user.id } });
 
     const meetup = await Meetup.findByPk(req.body.meetup_id, {
       include: [
