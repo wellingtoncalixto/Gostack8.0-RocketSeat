@@ -8,6 +8,7 @@ import FileController from './app/controllers/FileController';
 import MeetupController from './app/controllers/MeetupController';
 import SubscriptController from './app/controllers/SubscriptController';
 import OrganizingController from './app/controllers/OrganizingController';
+import NotificationController from './app/controllers/NotificationController';
 
 const uploads = multer(MulterConfig);
 const routes = new Router();
@@ -30,4 +31,6 @@ routes.delete('/meetup/:id', MeetupController.delete);
 
 routes.post('/subscription', SubscriptController.store);
 routes.get('/subscription/list', SubscriptController.index);
+
+routes.get('/notification', NotificationController.index);
 export default routes;
