@@ -3,9 +3,10 @@ import { Op } from 'sequelize';
 import Subscript from '../models/Subscript';
 import Meetup from '../models/Meetup';
 import User from '../models/User';
-import Mail from '../../lib/Mail';
+import Queue from '../../lib/Queue';
 
 import Notification from '../schemas/Notification';
+import SubscriptionMail from '../jobs/SubscriptionMail';
 
 class SubscriptController {
   async index(req, res) {
@@ -86,11 +87,10 @@ class SubscriptController {
       user: meetup.user_id,
     });
 
-    await Mail.sendMail({
-      to: `${meetup.user.name} <${meetup.user.email}>`,
-      subject: 'Agendamento Confirmado',
-      text: 'Houve uma nova inscrição no meetup',
+    await Queue.add(SubscriptionMail.key, {
+      meetup,
     });
+
     return res.json({
       sub: subscript,
       meet: meetup,
