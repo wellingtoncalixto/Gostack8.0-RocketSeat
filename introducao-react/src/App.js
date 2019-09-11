@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.css'
 
-import profiler from './assets/profiler.png'
+import TechList from './components/TechList'
+
 function App() {
-  return <img width="500" src={profiler} />
+  return <TechList />
   
 }
 
