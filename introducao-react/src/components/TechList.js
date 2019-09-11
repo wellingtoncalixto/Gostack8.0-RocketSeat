@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import react from "../assets/react.png";
 import "./TechList.css";
+import TechItem from "./TechItem";
+
 class TechList extends Component {
   state = {
     newTech: "",
@@ -19,7 +21,7 @@ class TechList extends Component {
   };
 
   handleDelete = tech => {
-    this.setState({ techs: this.state.techs.filter(t => t !== tech)})
+    this.setState({ techs: this.state.techs.filter(t => t !== tech) });
   };
 
   render() {
@@ -33,19 +35,18 @@ class TechList extends Component {
             placeholder="tech"
             onChange={this.handleInputChange}
             value={this.state.newTech}
-            onfocus="true"
+            autoFocus={true}
           />
-          <button class="adicionar" type="submit">
+          <button className="adicionar" type="submit">
             Adicionar
           </button>
           <ul>
             {this.state.techs.map(tech => (
-              <li key={tech}>
-                {tech}
-                <button class="remover" onClick={() => this.handleDelete(tech)} type="button">
-                  Remover
-                </button>
-              </li>
+              <TechItem
+                key={tech}
+                tech={tech}
+                onDelete={() => this.handleDelete(tech)}
+              />
             ))}
           </ul>
         </form>
