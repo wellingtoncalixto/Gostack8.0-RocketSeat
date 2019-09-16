@@ -17,7 +17,7 @@ input {
   border-radius: 5px;
   border: none;
   height: 25px;
-  box-shadow: 2px 2px #6d6a6a
+  box-shadow: 2px 2px #6d6a6a;
 }
 
 .buttons {
@@ -27,7 +27,7 @@ input {
 .adicionar {
   margin: 10px 5px;
   border-radius: 10px;
-  border:none;
+  border: none;
   width: 80px;
   background: #46c3bd;
   color: white;
