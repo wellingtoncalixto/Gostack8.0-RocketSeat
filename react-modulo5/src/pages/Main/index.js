@@ -1,7 +1,68 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { FaGithubAlt, FaPlus, FaSpinner } from 'react-icons/fa';
 
-import { Title } from './styles';
+import api from '../../services/api';
+import { Container, Form, SubmitButton } from './styles';
 
-export default function Main() {
-  return <Title>Hello</Title>;
+export default class Main extends Component {
+  // eslint-disable-next-line react/state-in-constructor
+  state = {
+    newRepo: '',
+    repositories: [],
+    loading: false,
+  };
+
+  handleSubmitChange = e => {
+    this.setState({ newRepo: e.target.value });
+  };
+
+  handleSubmit = async e => {
+    e.preventDefault();
+
+    this.setState({ loading: true });
+
+    const { newRepo, repositories } = this.state;
+
+    const response = await api.get(`/repos/${newRepo}`);
+
+    const data = {
+      name: response.data.full_name,
+    };
+
+    this.setState({
+      repositories: [...repositories, data],
+      newRepo: '',
+      loading: false,
+    });
+  };
+
+  render() {
+    const { newRepo, loading } = this.state;
+
+    return (
+      <Container>
+        <h1>
+          <FaGithubAlt />
+          Repositorios
+        </h1>
+
+        <Form onSubmit={this.handleSubmit}>
+          <input
+            type="text"
+            placeholder="nome do repositorio"
+            value={newRepo}
+            onChange={this.handleSubmitChange}
+          />
+
+          <SubmitButton loading={loading}>
+            {loading ? (
+              <FaSpinner color="#FFF" size={14} />
+            ) : (
+              <FaPlus color="#FFF" size={14} />
+            )}
+          </SubmitButton>
+        </Form>
+      </Container>
+    );
+  }
 }
