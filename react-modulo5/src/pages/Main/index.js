@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FaGithubAlt, FaPlus, FaSpinner } from 'react-icons/fa';
 
 import api from '../../services/api';
-import { Container, Form, SubmitButton } from './styles';
+import { Container, Form, SubmitButton, List } from './styles';
 
 export default class Main extends Component {
   // eslint-disable-next-line react/state-in-constructor
@@ -37,32 +37,43 @@ export default class Main extends Component {
   };
 
   render() {
-    const { newRepo, loading } = this.state;
+    const { newRepo, repositories, loading } = this.state;
 
     return (
-      <Container>
-        <h1>
-          <FaGithubAlt />
-          Repositorios
-        </h1>
+      <>
+        <Container>
+          <h1>
+            <FaGithubAlt />
+            Repositorios
+          </h1>
 
-        <Form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            placeholder="nome do repositorio"
-            value={newRepo}
-            onChange={this.handleSubmitChange}
-          />
+          <Form onSubmit={this.handleSubmit}>
+            <input
+              type="text"
+              placeholder="nome do repositorio"
+              value={newRepo}
+              onChange={this.handleSubmitChange}
+            />
 
-          <SubmitButton loading={loading}>
-            {loading ? (
-              <FaSpinner color="#FFF" size={14} />
-            ) : (
-              <FaPlus color="#FFF" size={14} />
-            )}
-          </SubmitButton>
-        </Form>
-      </Container>
+            <SubmitButton loading={loading}>
+              {loading ? (
+                <FaSpinner color="#FFF" size={14} />
+              ) : (
+                <FaPlus color="#FFF" size={14} />
+              )}
+            </SubmitButton>
+          </Form>
+        </Container>
+
+        <List>
+          {repositories.map(repository => (
+            <li key={repository.name}>
+              <span>{repository.name}</span>
+              <a href="#">Detalhes</a>
+            </li>
+          ))}
+        </List>
+      </>
     );
   }
 }
