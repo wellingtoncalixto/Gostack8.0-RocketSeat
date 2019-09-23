@@ -1,17 +1,41 @@
 import styled, { keyframes, css } from 'styled-components';
 
-export const Form = styled.form`
+export const Form = styled.form.attrs(props => ({
+  error: props.error,
+}))`
   margin-top: 30px;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 
   input {
     flex: 1;
-    border: 1px solid #eee;
+    border: 1px solid ${props => (props.error ? 'red' : 'black')};
     padding: 10px 15px;
     border-radius: 5px;
     font-size: 16px;
   }
+  ${props =>
+    props.error &&
+    css`
+      div {
+        display: flex;
+        width: 100%;
+        span {
+          display: flex;
+          justify-content: center;
+          flex: 1;
+          margin-top: 15px;
+          background: red;
+          color: #fff;
+          padding: 6px 10px;
+          border-radius: 5px;
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 16px;
+          font-weight: lighter;
+        }
+      }
+    `}
 `;
 
 const rotate = keyframes`
@@ -68,7 +92,24 @@ export const List = styled.ul`
     margin-top: 15px;
     border-radius: 5px;
   }
+  div {
+    display: flex;
+    align-items: center;
 
+    button {
+      display: flex;
+      background: none;
+      border: none;
+      margin-right: 5px;
+      align-items: center;
+    }
+
+    a {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 15px;
+      font-weight: lighter;
+    }
+  }
   span {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 25px;

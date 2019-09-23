@@ -136,3 +136,39 @@ export const IssueList = styled.ul`
     }
   }
 `;
+
+export const IssueFilter = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+
+  button {
+    margin: 5px;
+    border: none;
+    background: #000;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+  }
+`;
+
+export const PageAction = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    border: none;
+    margin: 0 15px;
+    background: #000;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  span {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+  }
+`;
