@@ -7,11 +7,15 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "android-dev": "ENVFILE=.env react-native run-android"
   },
   "dependencies": {
+    "dotenv": "^8.1.0",
     "react": "16.9.0",
-    "react-native": "0.61.1"
+    "react-native": "0.61.1",
+    "react-native-config": "^0.11.7",
+    "reactotron-react-native": "^4.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
