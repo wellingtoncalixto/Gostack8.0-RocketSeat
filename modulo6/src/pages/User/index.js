@@ -1,9 +1,82 @@
-import React from 'react';
-import {View} from 'react-native';
+import React, {Component} from 'react';
+import {ActivityIndicator} from 'react-native';
+import PropTypes from 'prop-types';
+import api from '../../services/api';
 
-// import { Container } from './styles';
+import {
+  Loading,
+  Header,
+  Avatar,
+  Name,
+  Bio,
+  Stars,
+  Starred,
+  OwnerAvatar,
+  Info,
+  Author,
+  Title,
+} from './styles';
+import Container from '../../components/Container';
 
-export default function User({navigation}) {
-  console.tron.log(navigation.getParam('user'));
-  return <View />;
+export default class User extends Component {
+  static navigationOptions = ({navigation}) => ({
+    title: navigation.getParam('user').name,
+  });
+
+  static propTypes = {
+    navigation: PropTypes.shape({
+      getParam: PropTypes.func,
+    }).isRequired,
+  };
+
+  state = {
+    stars: [],
+    loader: false,
+  };
+
+  async componentDidMount() {
+    const {navigation} = this.props;
+    this.setState({loader: true});
+    const user = navigation.getParam('user');
+
+    const response = await api.get(`/users/${user.login}/starred`);
+
+    this.setState({stars: response.data, loader: false});
+  }
+
+  render() {
+    const {navigation} = this.props;
+    const {stars, loader} = this.state;
+    const user = navigation.getParam('user');
+    return (
+      <>
+        {loader ? (
+          <Loading>
+            <ActivityIndicator size={30} color="#fff" />
+          </Loading>
+        ) : (
+          <Container>
+            <Header>
+              <Avatar source={{uri: user.avatar}} />
+              <Name>{user.name}</Name>
+              <Bio>{user.bio}</Bio>
+            </Header>
+            <Stars
+              data={stars}
+              keyExtractor={star => String(star.id)}
+              renderItem={({item}) => (
+                <Starred>
+                  <OwnerAvatar source={{uri: item.owner.avatar_url}} />
+                  <Info>
+                    <Author>{item.owner.login}</Author>
+                    <Title>{item.name}</Title>
+                  </Info>
+                </Starred>
+              )}
+            />
+          </Container>
+        )}
+      </>
+    );
+  }
 }
