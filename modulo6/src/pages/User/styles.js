@@ -9,6 +9,14 @@ export const Loading = styled.View`
   justify-content: center;
 `;
 
+export const LoadingText = styled.Text`
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Arial;
+  text-align: center;
+`;
+
 export const Header = styled.View`
   align-items: center;
   padding-bottom: 20px;
