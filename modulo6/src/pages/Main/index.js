@@ -3,12 +3,15 @@ import {Keyboard, ActivityIndicator} from 'react-native';
 import PropTypes from 'prop-types';
 import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import IconTrash from 'react-native-vector-icons/MaterialCommunityIcons';
 import api from '../../services/api';
 import {
   Form,
   Input,
+  Buttons,
   SubmitButton,
   List,
+  DeleteButton,
   User,
   Avatar,
   Name,
@@ -72,6 +75,13 @@ export default class Main extends Component {
     Keyboard.dismiss();
   };
 
+  handleDelete = user => {
+    const {users} = this.state;
+    this.setState({
+      users: users.filter(r => r !== user),
+    });
+  };
+
   handleNavigate = user => {
     const {navigation} = this.props;
 
@@ -109,10 +119,17 @@ export default class Main extends Component {
               <Avatar source={{uri: item.avatar}} />
               <Name>{item.name}</Name>
               <Bio>{item.bio}</Bio>
-
-              <ProfileButton onPress={() => this.handleNavigate(item)}>
-                <ProfileButtonText>Ver Perfil</ProfileButtonText>
-              </ProfileButton>
+              <Buttons>
+                <ProfileButton onPress={() => this.handleNavigate(item)}>
+                  <ProfileButtonText>Ver Perfil</ProfileButtonText>
+                </ProfileButton>
+                <DeleteButton
+                  type="button"
+                  key={item.name}
+                  onPress={() => this.handleDelete(item)}>
+                  <IconTrash name="trash-can" size={20} color="#fff" />
+                </DeleteButton>
+              </Buttons>
             </User>
           )}
         />
