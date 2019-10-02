@@ -54,7 +54,7 @@ function Cart({ cart }) {
         </tbody>
       </ProductTable>
       <footer>
-        <button type="button">FInalizer Pedido</button>
+        <button type="button">Finalizer Pedido</button>
 
         <Total>
           <span>

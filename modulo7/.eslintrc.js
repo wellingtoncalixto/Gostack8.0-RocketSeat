@@ -37,6 +37,7 @@ module.exports = {
     'react/static-property-placement': 'off',
     'import/no-named-as-default': 'off',
     'jsx-a11y/control-has-associated-label': 'off',
-    'no-console': ['error', {allow: ['tron']}]
+    'no-console': ['error', {allow: ['tron']}],
+    'no-param-reassign': 'off'
   },
 };
