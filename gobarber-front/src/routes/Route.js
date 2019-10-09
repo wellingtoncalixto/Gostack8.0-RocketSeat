@@ -5,22 +5,24 @@ import React from 'react';
 import AuthLayout from '~/pages/_layouts/auth';
 import DefaultLayout from '~/pages/_layouts/default';
 
+import store from '~/store';
+
 export default function RouteWrapper({
   component: Component,
   isPrivate,
   ...rest
 }) {
-  const singned = false;
+  const { signed } = store.getState().auth;
 
-  if (!singned && isPrivate) {
+  if (!signed && isPrivate) {
     return <Redirect to="/" />;
   }
 
-  if (singned && !isPrivate) {
+  if (signed && !isPrivate) {
     return <Redirect to="/dashboard" />;
   }
 
-  const Layout = singned ? DefaultLayout : AuthLayout;
+  const Layout = signed ? DefaultLayout : AuthLayout;
 
   return (
     <Route
