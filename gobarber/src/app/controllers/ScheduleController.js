@@ -3,7 +3,7 @@ import { Op } from 'sequelize';
 import User from '../models/User';
 import Appointment from '../models/Appointments';
 
-class SchenduleController {
+class ScheduleController {
   async index(req, res) {
     const checkUserProvider = await User.findOne({
       where: { id: req.userId, provider: true },
@@ -37,4 +37,4 @@ class SchenduleController {
   }
 }
 
-export default new SchenduleController();
+export default new ScheduleController();
