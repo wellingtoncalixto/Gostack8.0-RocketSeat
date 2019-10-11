@@ -3,5 +3,5 @@ import React from 'react';
 // import { Container } from './styles';
 
 export default function Perfil() {
-  return <div />;
+  return <h1>Perfil</h1>;
 }
