@@ -28,6 +28,7 @@ export const Button = styled.button`
   background: #f94d6a;
   border: none;
   border-radius: 5px;
+  padding: 5px;
 
   > strong {
     margin-left: 10px;

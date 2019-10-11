@@ -7,7 +7,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: #000000;
+  background: rgba(0, 0, 0, 0.5);
 
   img {
     height: 32px;
