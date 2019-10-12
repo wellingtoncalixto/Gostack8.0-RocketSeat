@@ -13,11 +13,11 @@ export default function Router() {
   return (
     <Switch>
       <Route path="/" exact component={SignIn} />
-      <Route path="/Cadastrar" component={SignUp} />
-      <Route path="/Dashboard" isPrivate component={Dashboard} />
+      <Route path="/cadastrar" component={SignUp} />
+      <Route path="/dashboard" isPrivate component={Dashboard} />
       <Route path="/Perfil" isPrivate component={Perfil} />
-      <Route path="/Detalhes" isPravate component={Detalhes} />
-      <Route path="/Meetapp" isPrivate component={NovoEditar} />
+      <Route path="/detalhes" isPrivate component={Detalhes} />
+      <Route path="/meetapp" isPrivate component={NovoEditar} />
     </Switch>
   );
 }
