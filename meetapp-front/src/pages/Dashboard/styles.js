@@ -55,6 +55,10 @@ export const Meetup = styled.li`
   padding: 15px;
   border-radius: 5px;
 
+  &:hover {
+    transform: scale(1.2);
+    background: ${darken(0.1, 'rgba(0, 0, 0, 0.5)')};
+  }
   strong {
     color: #fff;
   }

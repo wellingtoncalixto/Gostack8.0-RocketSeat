@@ -17,14 +17,18 @@ import {
 } from './styles';
 
 import banner from '~/assets/banner.svg';
+import history from '~/service/history';
 
 export default function Detalhes() {
+  function handleEdit() {
+    history.push('/meetup/editar');
+  }
   return (
     <Container>
       <Title>
         <strong>Mettup React Native</strong>
         <Buttons>
-          <EditButton>
+          <EditButton onClick={handleEdit}>
             <MdEdit size={20} color="#fff" />
             <strong>Editar</strong>
           </EditButton>
