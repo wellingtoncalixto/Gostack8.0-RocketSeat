@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const Wrapper = styled.div`
   @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
@@ -23,6 +24,7 @@ export const Wrapper = styled.div`
       border: 0;
       padding: 15px;
       border-radius: 5px;
+      color: #fff;
 
       &::placeholder {
         color: rgba(255, 255, 255, 0.7);
@@ -44,6 +46,10 @@ export const Wrapper = styled.div`
       color: #fff;
       font-family: Roboto;
       font-weight: bold;
+
+      &:hover {
+        background: ${darken(0.3, '#f94d6a')};
+      }
     }
 
     a {
