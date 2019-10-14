@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
-  max-width: 800px;
+  max-width: 1000px;
   margin: 50px auto;
   display: flex;
   flex-direction: column;
@@ -30,6 +31,10 @@ export const Button = styled.button`
   border: none;
   border-radius: 5px;
   padding: 5px;
+
+  &:hover {
+    background: ${darken(0.3, '#f94d6a')};
+  }
 
   > strong {
     margin-left: 10px;

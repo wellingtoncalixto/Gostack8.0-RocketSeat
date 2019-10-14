@@ -36,13 +36,13 @@ export const Container = styled.div`
     button {
       margin-left: 10px;
       border: 0;
-      background: #d44059;
+      background: #f94d6a;
       width: 55px;
       border-radius: 5px;
       color: #fff;
 
       &:hover {
-        background: ${darken(0.2, '#d44059')};
+        background: ${darken(0.3, '#f94d6a')};
       }
     }
   }

@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
   background: linear-gradient(#22202c, #402845);
   background-attachment: scroll;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
@@ -24,7 +25,7 @@ export const Wrapper = styled.div`
       border-radius: 5px;
 
       &::placeholder {
-        color: rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.7);
       }
     }
 

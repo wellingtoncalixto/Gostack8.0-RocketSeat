@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input, Textarea } from '@rocketseat/unform';
-import { MdAdd } from 'react-icons/md';
+import { MdAddCircleOutline } from 'react-icons/md';
 import { Container } from './styles';
 import Banner from '../Banner/index';
 
@@ -14,7 +14,7 @@ export default function Create() {
         <Input name="date" type="date" placeholder="Data do Meetup" />
         <Input name="localização" placeholder="Localização" />
         <button type="submit">
-          <MdAdd size={15} color="#fff" /> Adicionar{' '}
+          <MdAddCircleOutline size={15} color="#fff" /> Adicionar{' '}
         </button>
       </Form>
     </Container>
