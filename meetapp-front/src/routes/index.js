@@ -7,7 +7,8 @@ import SignUp from '../pages/SignUp';
 import Dashboard from '../pages/Dashboard';
 import Perfil from '../pages/Perfil';
 import Detalhes from '../pages/Detalhes';
-import NovoEditar from '../pages/Novo-Editar';
+import Create from '../pages/Novo-Editar/Create';
+import Editar from '../pages/Novo-Editar/Edit';
 
 export default function Router() {
   return (
@@ -17,7 +18,8 @@ export default function Router() {
       <Route path="/dashboard" isPrivate component={Dashboard} />
       <Route path="/Perfil" isPrivate component={Perfil} />
       <Route path="/detalhes" isPrivate component={Detalhes} />
-      <Route path="/meetapp" isPrivate component={NovoEditar} />
+      <Route path="/meetup/criar" isPrivate component={Create} />
+      <Route path="/meetup/editar" isPrivate component={Editar} />
     </Switch>
   );
 }

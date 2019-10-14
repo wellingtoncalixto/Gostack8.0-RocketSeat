@@ -30,7 +30,7 @@ export default function Detalhes() {
           </EditButton>
           <CancelButton>
             <MdDelete size={20} color="#fff" />
-            <strong>Cancel</strong>
+            <strong>Cancelar</strong>
           </CancelButton>
         </Buttons>
       </Title>

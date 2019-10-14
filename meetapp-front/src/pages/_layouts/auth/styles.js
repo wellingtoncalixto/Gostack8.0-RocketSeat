@@ -2,11 +2,12 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
-  display: flex;
   height: 100%;
-  flex-direction: column;
-  align-items: center;
+  background: linear-gradient(#22202c, #402845);
+  background-attachment: scroll;
+  display: flex;
   justify-content: center;
+  align-items: center;
 
   form {
     display: flex;

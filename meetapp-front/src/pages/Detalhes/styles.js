@@ -18,7 +18,7 @@ export const Container = styled.div`
 
   p {
     color: #ffffff;
-    margin-top: 15px;
+    margin-top: 35px;
   }
 `;
 export const Title = styled.div`
@@ -72,7 +72,7 @@ export const CancelButton = styled.button`
 export const Footer = styled.footer`
   display: flex;
   align-items: center;
-  margin-top: 25px;
+  margin-top: 100px;
 `;
 
 export const Date = styled.div`
