@@ -29,6 +29,12 @@ export const Wrapper = styled.div`
       }
     }
 
+    span {
+      color: #f94d6a;
+      align-self: flex-start;
+      margin-bottom: 10px;
+    }
+
     button {
       width: 100%;
       height: 50px;

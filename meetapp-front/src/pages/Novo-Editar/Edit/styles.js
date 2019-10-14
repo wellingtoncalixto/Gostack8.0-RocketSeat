@@ -33,6 +33,10 @@ export const Container = styled.div`
       font-size: 14px;
     }
 
+    span {
+      color: #f94d6a;
+    }
+
     button {
       height: 42px;
       align-self: flex-end;
