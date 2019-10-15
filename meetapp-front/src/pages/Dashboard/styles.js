@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { darken } from 'polished';
 
 export const Container = styled.div`
@@ -21,7 +22,7 @@ export const Container = styled.div`
   }
 `;
 
-export const Button = styled.button`
+export const Button = styled(Link)`
   display: flex;
   justify-content: center;
   height: 42px;
@@ -45,7 +46,7 @@ export const MeetupList = styled.ul`
   margin-top: 15px;
 `;
 
-export const Meetup = styled.li`
+export const Meetup = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -54,9 +55,11 @@ export const Meetup = styled.li`
   margin: 10px 0;
   padding: 15px;
   border-radius: 5px;
+  opacity: ${props => (props.past ? 0.6 : 1)};
+  cursor: pointer;
 
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
     background: ${darken(0.1, 'rgba(0, 0, 0, 0.5)')};
   }
   strong {

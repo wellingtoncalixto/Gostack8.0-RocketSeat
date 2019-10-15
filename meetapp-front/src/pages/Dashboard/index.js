@@ -1,53 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdAddCircleOutline, MdKeyboardArrowRight } from 'react-icons/md';
+import { format, parseISO } from 'date-fns';
 import { Container, Button, MeetupList, Meetup } from './styles';
-import history from '~/service/history';
+import api from '~/service/api';
 
 export default function Dashboard() {
-  function handleCreateMeetup() {
-    history.push('/meetup/criar');
-  }
-  function handleDetalhes() {
-    history.push('/detalhes');
-  }
+  const [meetups, setMeetups] = useState([]);
+
+  useEffect(() => {
+    async function loadMeetups() {
+      const response = await api.get('organizing');
+
+      const data = response.data.map(meetup => {
+        return {
+          ...meetup,
+          formattedDate: format(parseISO(meetup.date), "dd/MM/Y - HH'h'mm"),
+        };
+      });
+
+      setMeetups(data);
+    }
+
+    loadMeetups();
+  }, []);
+
   return (
     <Container>
       <div>
         <strong>Meus Meetups</strong>
-        <Button onClick={handleCreateMeetup}>
+
+        <Button to="/meetup/criar">
           <MdAddCircleOutline size={20} color="#fff" />
           <strong>Novo Meetup</strong>
         </Button>
       </div>
       <MeetupList>
-        <Meetup onClick={handleDetalhes}>
-          <strong>React Native</strong>
-          <aside>
-            <span>24 de Junho, às 20h</span>
-            <MdKeyboardArrowRight size={24} color="#fff" />
-          </aside>
-        </Meetup>
-        <Meetup>
-          <strong>React Native</strong>
-          <aside>
-            <span>24 de Junho, às 20h</span>
-            <MdKeyboardArrowRight size={24} color="#fff" />
-          </aside>
-        </Meetup>
-        <Meetup>
-          <strong>React Native</strong>
-          <aside>
-            <span>24 de Junho, às 20h</span>
-            <MdKeyboardArrowRight size={24} color="#fff" />
-          </aside>
-        </Meetup>
-        <Meetup>
-          <strong>React Native</strong>
-          <aside>
-            <span>24 de Junho, às 20h</span>
-            <MdKeyboardArrowRight size={24} color="#fff" />
-          </aside>
-        </Meetup>
+        {meetups.map(meetup => (
+          <Meetup
+            to={`/detalhes/${meetup.id}`}
+            key={meetup.id}
+            past={meetup.past}
+          >
+            <strong>{meetup.title}</strong>
+            <aside>
+              <span>{meetup.formattedDate}</span>
+              <MdKeyboardArrowRight size={24} color="#fff" />
+            </aside>
+          </Meetup>
+        ))}
       </MeetupList>
     </Container>
   );

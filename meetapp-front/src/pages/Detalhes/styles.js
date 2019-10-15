@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { darken } from 'polished';
 
 export const Container = styled.div`
@@ -37,7 +38,7 @@ export const Buttons = styled.nav`
   display: flex;
   align-items: center;
 `;
-export const EditButton = styled.button`
+export const EditButton = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;

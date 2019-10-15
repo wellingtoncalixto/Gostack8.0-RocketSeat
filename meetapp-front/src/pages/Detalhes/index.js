@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   MdEdit,
   MdDelete,
   MdPermContactCalendar,
   MdLocationOn,
 } from 'react-icons/md';
+import { format, parseISO } from 'date-fns';
 import {
   Container,
   Buttons,
@@ -16,19 +18,38 @@ import {
   Local,
 } from './styles';
 
-import banner from '~/assets/banner.svg';
-import history from '~/service/history';
+import api from '~/service/api';
 
-export default function Detalhes() {
-  function handleEdit() {
-    history.push('/meetup/editar');
-  }
+export default function Detalhes({ match }) {
+  const { id } = match.params;
+  const [meetup, setMeetup] = useState({});
+  const [banner, setBanner] = useState({});
+
+  useEffect(() => {
+    async function loadMeetup() {
+      const response = await api.get(`organizing/${id}`);
+
+      setMeetup({
+        ...response.data.meetup,
+        formattedDate: format(
+          parseISO(response.data.meetup.date),
+          "dd/MM/Y - HH'h'mm"
+        ),
+      });
+      setBanner({
+        ...response.data.meetup.banner,
+      });
+    }
+    loadMeetup();
+  }, [id]);
+  console.tron.log(meetup);
+  console.tron.log(banner);
   return (
     <Container>
       <Title>
-        <strong>Mettup React Native</strong>
+        <strong>{meetup.title}</strong>
         <Buttons>
-          <EditButton onClick={handleEdit}>
+          <EditButton to="/meetup/">
             <MdEdit size={20} color="#fff" />
             <strong>Editar</strong>
           </EditButton>
@@ -38,23 +59,27 @@ export default function Detalhes() {
           </CancelButton>
         </Buttons>
       </Title>
-      <img src={banner} alt="" />
-      <p>
-        O Meetup de React native é um evento que reune a comunidade de
-        desenvolvimento mobile utilizando React a fim de compartilhar
-        conhecimento. todos são convidados
-      </p>
+      <img src={banner.url} alt={meetup.title} />
+      <p>{meetup.description}</p>
 
       <Footer>
         <Date>
           <MdPermContactCalendar size={15} color="#fff" />
-          <span>24 de Junho, às 20h </span>
+          <span>{meetup.formattedDate}</span>
         </Date>
         <Local>
           <MdLocationOn size={15} color="#fff" />
-          <span>24 de Junho, às 20h </span>
+          <span>{meetup.location}</span>
         </Local>
       </Footer>
     </Container>
   );
 }
+
+Detalhes.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }),
+  }).isRequired,
+};

@@ -16,10 +16,10 @@ export default function Router() {
       <Route path="/" exact component={SignIn} />
       <Route path="/cadastrar" component={SignUp} />
       <Route path="/dashboard" isPrivate component={Dashboard} />
-      <Route path="/Perfil" isPrivate component={Perfil} />
-      <Route path="/detalhes" isPrivate component={Detalhes} />
+      <Route path="/perfil" isPrivate component={Perfil} />
+      <Route path="/detalhes/:id" exact isPrivate component={Detalhes} />
       <Route path="/meetup/criar" isPrivate component={Create} />
-      <Route path="/meetup/editar" isPrivate component={Editar} />
+      <Route path="/meetup/:id/editar" isPrivate component={Editar} />
     </Switch>
   );
 }
