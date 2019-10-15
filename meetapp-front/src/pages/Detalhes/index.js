@@ -28,7 +28,6 @@ export default function Detalhes({ match }) {
   useEffect(() => {
     async function loadMeetup() {
       const response = await api.get(`organizing/${id}`);
-
       setMeetup({
         ...response.data.meetup,
         formattedDate: format(
@@ -49,7 +48,7 @@ export default function Detalhes({ match }) {
       <Title>
         <strong>{meetup.title}</strong>
         <Buttons>
-          <EditButton to="/meetup/">
+          <EditButton to={`/meetup/${meetup.id}/editar`}>
             <MdEdit size={20} color="#fff" />
             <strong>Editar</strong>
           </EditButton>
