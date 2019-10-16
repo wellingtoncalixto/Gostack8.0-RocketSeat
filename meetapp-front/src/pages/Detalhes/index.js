@@ -19,6 +19,7 @@ import {
 } from './styles';
 
 import api from '~/service/api';
+import history from '~/service/history';
 
 export default function Detalhes({ match }) {
   const { id } = match.params;
@@ -41,6 +42,11 @@ export default function Detalhes({ match }) {
     }
     loadMeetup();
   }, [id]);
+
+  async function handleDelete(meetupId) {
+    await api.delete(`/meetup/${meetupId}`);
+    history.push('/dashboard');
+  }
   return (
     <Container>
       <Title>
@@ -50,7 +56,7 @@ export default function Detalhes({ match }) {
             <MdEdit size={20} color="#fff" />
             <strong>Editar</strong>
           </EditButton>
-          <CancelButton>
+          <CancelButton onClick={() => handleDelete(meetup.id)}>
             <MdDelete size={20} color="#fff" />
             <strong>Cancelar</strong>
           </CancelButton>

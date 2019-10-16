@@ -37,7 +37,7 @@ export const Container = styled.div`
       color: #f94d6a;
     }
 
-    button {
+    > button {
       height: 42px;
       align-self: flex-end;
       width: 20%;
@@ -46,6 +46,14 @@ export const Container = styled.div`
       border-radius: 5px;
       color: #fff;
       font-weight: bold;
+    }
+
+    .react-datepicker__input-container {
+      display: flex;
+
+      input {
+        width: 100%;
+      }
     }
   }
 `;
