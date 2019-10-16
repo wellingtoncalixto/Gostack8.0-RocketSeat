@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input, Textarea } from '@rocketseat/unform';
+import { toast } from 'react-toastify';
 
 import { MdEdit } from 'react-icons/md';
 
@@ -41,8 +42,18 @@ export default function Editar({ match }) {
   }, [id]);
 
   async function handleSubmit(data) {
-    await api.put(`meetup/${id}`, data);
-    history.push(`/detalhes/${id}`);
+    try {
+      await api.put(`meetup/${id}`, data);
+      toast.success('Meetup editado com sucesso');
+      history.push(`/detalhes/${id}`);
+    } catch (err) {
+      const errData = err.response.data;
+      toast.error(
+        errData && errData.error
+          ? `Erro ao editar: ${errData.error}`
+          : 'Erro ao editar, tente de novo'
+      );
+    }
   }
   return (
     <Container>

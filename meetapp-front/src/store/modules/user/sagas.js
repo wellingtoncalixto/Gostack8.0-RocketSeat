@@ -1,4 +1,6 @@
 import { all, takeLatest, call, put } from 'redux-saga/effects';
+
+import { toast } from 'react-toastify';
 import api from '~/service/api';
 import { updateProfileSuccess, updateProfileFailute } from './actions';
 
@@ -13,9 +15,15 @@ export function* updateProfile({ payload }) {
     };
 
     const response = yield call(api.put, 'users', profile);
-
+    toast.success('Dados atualizados com sucesso');
     yield put(updateProfileSuccess(response.data));
   } catch (err) {
+    const errData = err.response.data;
+    toast.error(
+      errData && errData.error
+        ? `Erro ao editar: ${errData.error}`
+        : 'Erro ao entrar, tente de novo'
+    );
     yield put(updateProfileFailute());
   }
 }

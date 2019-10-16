@@ -3,6 +3,7 @@ import React from 'react';
 import { Form, Input, Textarea } from '@rocketseat/unform';
 import { MdAddCircleOutline } from 'react-icons/md';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 
 import Banner from '../Banner/index';
 import DatePicker from '~/components/DatePicker';
@@ -22,9 +23,20 @@ const schema = Yup.object().shape({
 
 export default function Create() {
   async function handleSubmit(data) {
-    await api.post('/meetup', data);
-    history.push('/dashboard');
+    try {
+      await api.post('/meetup', data);
+      toast.success('Meetup cadastrado com sucesso');
+      history.push('/dashboard');
+    } catch (err) {
+      const errData = err.response.data;
+      toast.error(
+        errData && errData.error
+          ? `Erro ao cadastrar: ${errData.error}`
+          : 'Erro ao cadastrar, tente de novo'
+      );
+    }
   }
+
   return (
     <Container>
       <Form schema={schema} onSubmit={handleSubmit}>
