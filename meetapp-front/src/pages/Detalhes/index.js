@@ -41,8 +41,6 @@ export default function Detalhes({ match }) {
     }
     loadMeetup();
   }, [id]);
-  console.tron.log(meetup);
-  console.tron.log(banner);
   return (
     <Container>
       <Title>

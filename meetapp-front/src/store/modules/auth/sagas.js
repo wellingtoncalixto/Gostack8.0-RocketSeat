@@ -1,7 +1,7 @@
 import { takeLatest, put, call, all } from 'redux-saga/effects';
 import api from '~/service/api';
 import history from '~/service/history';
-import { signInSuccess } from './actions';
+import { signInSuccess, updateMeetupSuccess } from './actions';
 
 export function* signIn({ payload }) {
   const { email, password } = payload;
@@ -32,6 +32,18 @@ export function* signUp({ payload }) {
   history.push('/');
 }
 
+export function* updateMeetup({ payload }) {
+  const meetup = payload.data;
+  console.tron.log(meetup);
+  const { id } = meetup;
+
+  const response = yield call(api.put, `meetup/${id}`, meetup);
+
+  yield put(updateMeetupSuccess(response.data));
+
+  history.push('/dashboard');
+}
+
 export function setToken({ payload }) {
   if (!payload) return;
 
@@ -51,4 +63,5 @@ export default all([
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
   takeLatest('@auth/SIGN_OUT', signOut),
+  takeLatest('@auth/UPDATE_MEETUP_REQUEST', updateMeetup),
 ]);
