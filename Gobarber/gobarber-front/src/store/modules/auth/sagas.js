@@ -13,8 +13,8 @@ export function* signIn({ payload }) {
       password,
     });
 
-    api.defaults.headers.Authorization = `Bearer ${payload.token}`;
     const { token, user } = response.data;
+    api.defaults.headers.Authorization = `Bearer ${token}`;
 
     if (!user.provider) {
       toast.error('usuario não é um prestador de serviços');
