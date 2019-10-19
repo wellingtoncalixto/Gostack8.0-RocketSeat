@@ -13,8 +13,8 @@ export function* signIn({payload}) {
       password,
     });
 
-    api.defaults.headers.Authorization = `Bearer ${payload.token}`;
     const {token, user} = response.data;
+    api.defaults.headers.Authorization = `Bearer ${token}`;
 
     if (user.provider) {
       Alert.alert(
@@ -57,16 +57,17 @@ export function* signUp({payload}) {
 }
 
 export function setToken({payload}) {
-  if (!payload || !payload.auth);
-}
+  if (!payload || !payload.auth) return;
 
-export function signOut() {
-  // history.push('/');
+  const {token} = payload.auth;
+  console.tron.log(token);
+  if (token) {
+    api.defaults.headers.Authorization = `Bearer ${token}`;
+  }
 }
 
 export default all([
   takeLatest('persist/REHYDRATE', setToken),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
-  takeLatest('@auth/SIGN_OUT', signOut),
 ]);

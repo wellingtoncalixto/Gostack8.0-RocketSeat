@@ -1,18 +1,45 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Appointments from '~/components/Appointments';
+
+import api from '~/services/api';
 
 import {Container, Title, List} from './styles';
 
-const data = [1, 2, 3, 4, 5];
-
 export default function Dashboard() {
+  const [appointments, setAppointments] = useState('');
+
+  useEffect(() => {
+    async function loadAppointments() {
+      const response = await api.get('appointments');
+
+      setAppointments(response.data);
+    }
+    loadAppointments();
+  }, []);
+
+  async function handleCancel(id) {
+    const response = await api.delete(`appointments/${id}`);
+
+    setAppointments(
+      appointments.map(appointment =>
+        appointment.id === id
+          ? {
+              ...appointment,
+              canceled_at: response.data.canceled_at,
+            }
+          : appointment
+      )
+    );
+  }
   return (
     <Container>
       <Title>Agendamentos</Title>
       <List
-        data={data}
-        keyExtractor={item => String(item)}
-        renderItem={({item}) => <Appointments data={item} />}
+        data={appointments}
+        keyExtractor={item => String(item.id)}
+        renderItem={({item}) => (
+          <Appointments onCancel={() => handleCancel(item.id)} data={item} />
+        )}
       />
     </Container>
   );

@@ -7,7 +7,7 @@ export default reducers => {
       timeout: 0,
       key: 'gobarber',
       storage: AsyncStorage,
-      blacklist: ['auth', 'user'],
+      whiteList: ['auth', 'user'],
     },
     reducers
   );
