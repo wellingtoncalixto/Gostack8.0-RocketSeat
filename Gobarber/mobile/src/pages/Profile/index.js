@@ -1,5 +1,6 @@
 import React, {useRef, useState, useEffect} from 'react';
 
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   Container,
@@ -118,3 +119,10 @@ export default function Profile() {
     </Container>
   );
 }
+
+Profile.navigationOptions = {
+  tabBarLabel: 'Perfil',
+  tabBarIcon: ({tintColor}) => (
+    <Icon name="person" size={20} color={tintColor} />
+  ),
+};

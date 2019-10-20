@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react';
+
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import Appointments from '~/components/Appointments';
 
 import api from '~/services/api';
@@ -44,3 +46,10 @@ export default function Dashboard() {
     </Container>
   );
 }
+
+Dashboard.navigationOptions = {
+  tabBarLabel: 'Agendamentos',
+  tabBarIcon: ({tintColor}) => (
+    <Icon name="event" size={20} color={tintColor} />
+  ),
+};
