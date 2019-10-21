@@ -9,6 +9,8 @@ import '~/config/ReactotronConfig';
 
 import Routes from './routes';
 
+import App from './App';
+
 import {store, persistor} from './store';
 
 export default function Ap() {
@@ -17,6 +19,7 @@ export default function Ap() {
       <PersistGate persistor={persistor}>
         <Background>
           <StatusBar barStyle="light-content" backgroundColor="#22202C" />
+          <App />
           <Routes />
         </Background>
       </PersistGate>
