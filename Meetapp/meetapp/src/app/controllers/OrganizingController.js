@@ -11,7 +11,7 @@ class OrganizingController {
       where: {
         user_id,
       },
-      order: ['date'],
+      order: [['id', 'DESC']],
       limit: 20,
       offset: (page - 1) * 20,
     });
